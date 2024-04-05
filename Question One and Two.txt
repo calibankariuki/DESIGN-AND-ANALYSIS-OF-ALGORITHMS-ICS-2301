@@ -1,0 +1,35 @@
+//Question One
+
+#include <string>
+#include <vector>
+
+std::string extractWords(const std::string& sentence, int start, int end) {
+    if (start > end || start >= sentence.length() || end >= sentence.length())
+        return "";
+
+    std::string result;
+    int i = start;
+    while (i <= end && sentence[i] != ' ') {
+        result += sentence[i];
+        i++;
+    }
+    if (i <= end)
+        result += ' ';
+    return result + extractWords(sentence, i + 1, end);
+}
+
+
+//Question two
+
+#include <vector>
+#include <algorithm>
+
+std::vector<int> circular_shift(const std::vector<int>& A, int k) {
+    int n = A.size();
+    std::vector<int> shifted_array(A);
+    k = k % n;
+    std::reverse(shifted_array.begin(), shifted_array.end());
+    std::reverse(shifted_array.begin(), shifted_array.begin() + k);
+    std::reverse(shifted_array.begin() + k, shifted_array.end());
+    return shifted_array;
+}
